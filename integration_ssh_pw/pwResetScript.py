@@ -58,7 +58,7 @@ def fn():
         elif channelData.endswith("Enter session number to resume or press <Enter> to start a new one:"):
             channel.send('\n')
         else:
-            host = raw_input('Want to exit then type \'exit;\'?')
+            host = input("\n\nWant to exit then type 'exit;'?")
             channel.send(host)
             channel.send('\n')
 
