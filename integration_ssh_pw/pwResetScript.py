@@ -2,9 +2,9 @@ import paramiko
 import sys
 import os
 import time
-# from password_generator import PasswordUtil
-sys.path.insert(0, '/Users/Sahoon/Project/python/password_generator')
-from PasswordUtil import PasswordUtil
+from password_generator import PasswordUtil
+# sys.path.insert(0, '/Users/Sahoon/Project/python/password_generator')
+# from PasswordUtil import PasswordUtil
 
 
 #setting parameters like host IP, username, passwd and number of iterations to gather cmds
