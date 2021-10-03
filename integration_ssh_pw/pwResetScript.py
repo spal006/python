@@ -1,9 +1,9 @@
 import paramiko
 import sys
 import time
-
-sys.path.insert(0, '/Users/Sahoon/Project/python/password_generator')
-from PasswordUtil import PasswordUtil
+from password_generator import PasswordUtil
+# sys.path.insert(0, '/Users/Sahoon/Project/python/password_generator')
+# from PasswordUtil import PasswordUtil
 
 
 
@@ -21,7 +21,7 @@ def fn():
     client1.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
     #connect to switch
-    # client1.connect('hst',username=user,password=PW)
+    # client1.connect(HOST,username=USER,password=PASS)
     client1.connect(HOST,username=USER)
     print ("SSH connection to %s established" %HOST)
 
@@ -33,8 +33,8 @@ def fn():
 
 
 
-    channel = ssh.invoke_shell()
-    channelData = ""
+    channel = client1.invoke_shell()
+    channelData = str()
 
     while True:
         if channel.recv_ready():
@@ -53,6 +53,8 @@ def fn():
             passwObj = PasswordUtil(10,'1,2,3,4')
             password = passwObj.generatePassword()
             channel.send(password)
+            channel.send('\n')
+        elif channelData.endswith("SSH connection to 10.200.105.38 established"):
             channel.send('\n')
         else:
             host = raw_input('Want to exit then type \'exit;\'?')
