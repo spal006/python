@@ -1,9 +1,8 @@
 import paramiko
 import sys
+import os
 import time
 from password_generator import PasswordUtil
-# sys.path.insert(0, '/Users/Sahoon/Project/python/password_generator')
-# from PasswordUtil import PasswordUtil
 
 
 
@@ -35,11 +34,11 @@ def fn():
 
     channel = client1.invoke_shell()
     channelData = str()
-
+    channel.send('password')
     while True:
         if channel.recv_ready():
-            channelData += channel.recv(9999)
-            os.sytem('cls')
+            channelData += channel.recv(9999).decode('utf-8')
+            os.system('cls')
             print ("##### Device Output #####")
             print (channelData)
             print ("#####      END      #####")
@@ -55,6 +54,8 @@ def fn():
             channel.send(password)
             channel.send('\n')
         elif channelData.endswith("SSH connection to 10.200.105.38 established"):
+            channel.send('\n')
+        elif channelData.endswith("Enter session number to resume or press <Enter> to start a new one:"):
             channel.send('\n')
         else:
             host = raw_input('Want to exit then type \'exit;\'?')
